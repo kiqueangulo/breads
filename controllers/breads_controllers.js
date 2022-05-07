@@ -1,4 +1,5 @@
 const express = require('express');
+const { append } = require('express/lib/response');
 const breads = express.Router();
 const Bread = require('../models/breads.js');
 
@@ -9,7 +10,12 @@ breads.get('/', (req, res) => {
             breads: Bread,
             title: 'Index Page'
         }
-    );
+    )
+});
+
+// Show
+breads.get('/:arrayIndex', (req, res) => {
+    res.send(Bread[req.params.arrayIndex])
 });
 
 module.exports = breads;
