@@ -22,6 +22,11 @@ app.get('/', (req, res) => {
 const breadsControllers = require('./controllers/breads_controllers.js');
 app.use('/breads', breadsControllers);
 
+// Wild card
+app.get('*', (req, res) => {
+    res.send('404')
+});
+
 // Listen
 app.listen(PORT, () => {
     console.log('noming at port', PORT);
