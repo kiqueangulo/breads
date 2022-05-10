@@ -13,6 +13,8 @@ app.engine('jsx', require('express-react-views').createEngine());
 
 app.use(express.static('public'));
 
+app.use(express.urlencoded({extended: true}))
+
 // Routes
 app.get('/', (req, res) => {
     res. send('Welcome to an Awesome App about Braeds!');
