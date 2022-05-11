@@ -45,6 +45,18 @@ breads.post('/', (req, res) => {
     res.redirect('/breads'); // It takes the user back the index page
 });
 
+// Update
+breads.put('/:arrayIndex', (req, res) => {
+    if (req.body.hasGluten === 'on') {
+        req.body.hasGluten = true
+    } else {
+        req.body.hasGluten = false
+    };
+
+    Bread[req.params.arrayIndex] = req.body;
+    res.redirect(`/breads/${req.params.arrayIndex}`);
+});
+
 // Delete
 breads.delete('/:indexArray', (req, res) => {
     Bread.splice(req.params.indexArray, 1);
