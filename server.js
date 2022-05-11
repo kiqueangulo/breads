@@ -1,5 +1,6 @@
 // Dependencies
 const express = require('express');
+const methodOverride = require('method-override');
 
 // Configuration
 require('dotenv').config();
@@ -13,7 +14,10 @@ app.engine('jsx', require('express-react-views').createEngine());
 
 app.use(express.static('public'));
 
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: true}));
+
+app.use(methodOverride('_method')); // To override the POST method at show.jsx
+
 
 // Routes
 app.get('/', (req, res) => {
