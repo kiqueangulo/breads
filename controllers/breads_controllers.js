@@ -44,4 +44,10 @@ breads.post('/', (req, res) => {
     res.redirect('/breads'); // It takes the user back the index page
 });
 
+// Delete
+breads.delete('/:indexArray', (req, res) => {
+    Bread.splice(req.params.indexArray, 1);
+    res.status(303).redirect('/breads');
+});
+
 module.exports = breads;
