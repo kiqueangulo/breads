@@ -18,14 +18,6 @@ breads.get('/new', (req, res) => {
     res.render('new')
 });
 
-// Edit
-breads.get('/:indexArray/edit', (req, res) => {
-    res.render('edit', {
-        bread: Bread[req.params.indexArray],
-        index: req.params.indexArray
-    })
-});
-
 // Update
 breads.put('/:arrayIndex', (req, res) => {
     if (req.body.hasGluten === 'on') {
@@ -48,6 +40,14 @@ breads.get('/:arrayIndex', (req, res) => {
     } else {
         res.render('404')
     };
+});
+
+// Edit
+breads.get('/:indexArray/edit', (req, res) => {
+    res.render('edit', {
+        bread: Bread[req.params.indexArray],
+        index: req.params.indexArray
+    })
 });
 
 // Create
