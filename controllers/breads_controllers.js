@@ -1,17 +1,23 @@
 const express = require('express');
-const { append } = require('express/lib/response');
+// const { append } = require('express/lib/response');
+const Bread = require('../models/breads');
 const breads = express.Router();
-const Bread = require('../models/breads.js');
+
 
 // Index
 breads.get('/', (req, res) => {
-    res.render('Index', 
-        {
-            breads: Bread,
-            title: 'Index Page'
-        }
-    )
-});
+    console.log(Bread.destinations);
+    Bread.find()
+        .then(foundBreads => {
+            console.log(foundBreads)
+        })
+    // res.render('index',
+    //   {
+    //     breads: Bread,
+    //     title: 'Index Page'
+    //   }
+    // )
+})
 
 // New
 breads.get('/new', (req, res) => {
@@ -31,16 +37,17 @@ breads.put('/:arrayIndex', (req, res) => {
 });
 
 // Show
-breads.get('/:arrayIndex', (req, res) => {
-    if (Bread[req.params.arrayIndex]) {
-        res.render('Show', {
-            bread: Bread[req.params.arrayIndex],
-            index: req.params.arrayIndex
+breads.get('/:id', (req, res) => {
+    Bread.findById(req.params.id)
+        .then(foundBread => {
+            res.render('show', {
+                bread: foundBread
+            })
         })
-    } else {
-        res.render('404')
-    };
-});
+        .catch(err => {
+          res.send('404')
+        })
+  })  
 
 // Edit
 breads.get('/:indexArray/edit', (req, res) => {
