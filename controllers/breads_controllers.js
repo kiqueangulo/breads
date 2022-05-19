@@ -26,8 +26,12 @@ breads.post('/', (req, res) => {
         req.body.hasGluten = 'false'
     };
 
-    Bread.create(req.body);
-    res.redirect('/breads'); // It takes the user back the index page
+    Bread.create(req.body)
+        .then(() => res.redirect('/breads'))
+        .catch(err => {   // It's not catching the errors
+            console.log(`err ${err}`);
+            res.render('404')
+        })
 });
 
 // New
@@ -57,9 +61,8 @@ breads.put('/:id', (req, res) => {
     };
 
     Bread.findByIdAndUpdate(req.params.id, req.body, { new: true }) 
-        .then(updatedBread => {
-            res.redirect(`/breads/${req.params.id}`) 
-    })
+        .then(updatedBread => res.redirect(`/breads/${req.params.id}`))
+        .catch(err => res.render('404'))   // It's not catching the errors
 });
 
 // Delete
