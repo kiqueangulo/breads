@@ -43,6 +43,9 @@ breads.get('/new', (req, res) => {
 breads.get('/:id', (req, res) => {
     Bread.findById(req.params.id)
         .then(foundBread => {
+            const bakedBy = foundBread.getBakedBy();
+            console.log(bakedBy);
+
             res.render('show', {
                 bread: foundBread
             })
@@ -60,7 +63,7 @@ breads.put('/:id', (req, res) => {
         req.body.hasGluten = false
     };
 
-    Bread.findByIdAndUpdate(req.params.id, req.body, { new: true }) 
+    Bread.findByIdAndUpdate(req.params.id, req.body, { runValidators: true }) 
         .then(updatedBread => res.redirect(`/breads/${req.params.id}`))
         .catch(err => res.render('404'))   // It's not catching the errors
 });

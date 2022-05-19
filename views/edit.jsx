@@ -30,7 +30,7 @@ function Edit ({bread}) {
             />
             <br />
             <label htmlFor="baker">Baker</label>
-            <select name="baker" id="baker" defaultValue={bread.baker}>
+            <select name="baker" id="baker" >
                 <option value="Rachel">Rachel</option>
                 <option value="Monica">Monica</option>
                 <option value="Joey">Joey</option>
