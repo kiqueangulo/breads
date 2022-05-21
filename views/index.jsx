@@ -13,7 +13,6 @@ function Index({breads, title}) {
                             <a href={`/breads/${breads.id}`}>
                                 {breads.name}
                             </a>
-                            <li>{breads.getBakedBy()}</li>
                         </li>
                         )
                     })

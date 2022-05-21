@@ -1,5 +1,4 @@
 const express = require('express');
-// const { append } = require('express/lib/response');
 const Bread = require('../models/breads.js');
 const Baker = require('../models/bakers.js');
 const breads = express.Router();
@@ -48,10 +47,8 @@ breads.get('/new', (req, res) => {
 // Show
 breads.get('/:id', (req, res) => {
     Bread.findById(req.params.id)
+        .populate('baker')
         .then(foundBread => {
-            const bakedBy = foundBread.getBakedBy();
-            console.log(bakedBy);
-
             res.render('show', {
                 bread: foundBread
             })
@@ -84,9 +81,15 @@ breads.delete('/:id', (req, res) => {
 
 // Edit
 breads.get('/:id/edit', (req, res) => {
-    Bread.findById(req.params.id)
-        .then(foundedBread => {
-            res.render('edit', { bread: foundedBread })
+    Baker.find()
+        .then(foundBakers => {
+            Bread.findById(req.params.id)
+                .then(foundedBread => {
+                    res.render('edit', { 
+                        bread: foundedBread,
+                        bakers: foundBakers
+                    })
+                })
         })
 });
 
