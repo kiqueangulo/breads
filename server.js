@@ -30,10 +30,14 @@ app.get('/', (req, res) => {
 const breadsControllers = require('./controllers/breads_controllers.js');
 app.use('/breads', breadsControllers);
 
+// Bakers
+const bakersController = require('./controllers/bakers_controller.js');
+app.use('/bakers', bakersController);
+
 // Wild card
-// app.get('*', (req, res) => {
-//     res.send('404')
-// });
+app.get('*', (req, res) => {
+    res.send('404')
+});
 
 // Listen
 app.listen(PORT, () => {
