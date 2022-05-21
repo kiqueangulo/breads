@@ -1,6 +1,7 @@
 const express = require('express');
 // const { append } = require('express/lib/response');
-const Bread = require('../models/breads');
+const Bread = require('../models/breads.js');
+const Baker = require('../models/bakers.js');
 const breads = express.Router();
 
 
@@ -36,7 +37,12 @@ breads.post('/', (req, res) => {
 
 // New
 breads.get('/new', (req, res) => {
-    res.render('new')
+    Baker.find()
+        .then(foundBakers => {
+            res.render('new', {
+                bakers: foundBakers
+            })
+        })
 });
 
 // Show
