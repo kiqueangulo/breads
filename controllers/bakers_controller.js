@@ -22,6 +22,12 @@ baker.get('/:id', (req, res) => {
         })
 });
 
+// Delete
+baker.delete('/:id', (req, res) => {
+    Baker.findByIdAndDelete(req.params.id)
+        .then(deletedBaker => res.status(303).redirect('/breads'))
+});
+
 baker.get('/data/seed', (req, res) => {
     Baker.insertMany(bakerSeedData)
         .then(res.redirect('/breads'))
