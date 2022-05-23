@@ -24,9 +24,8 @@ bakerSchema.virtual('breads', {
 });
 
 // Hooks
-bakerSchema.post('findOneAndDelete', function() { 
-    Bread.deleteMany({ baker: this._conditions._id })
-        .then(deleteStatus => console.log(deleteStatus))
+bakerSchema.post('findOneAndDelete', async function() { 
+    await Bread.deleteMany({ baker: this._conditions._id })
 });
 
 module.exports = mongoose.model('Baker', bakerSchema);
