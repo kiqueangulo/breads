@@ -10,8 +10,8 @@ function Index({breads, bakers, title}) {
                 {
                     bakers.map(baker => {
                         return (
-                            <li key={baker.id}>
-                                <a href={`/bakers/${baker.id}`}>{baker.name}</a>
+                            <li key={baker._id}>
+                                <a href={`/bakers/${baker._id}`}>{baker.name}</a>
                             </li>
                         )
                     })
@@ -20,10 +20,10 @@ function Index({breads, bakers, title}) {
             <h3>Breads</h3>
             <ul>
                 {
-                    breads.map((breads, index) => {
+                    breads.map((breads) => {
                         return (
-                        <li key={index}>
-                            <a href={`/breads/${breads.id}`}>
+                        <li key={breads._id}>
+                            <a href={`/breads/${breads._id}`}>
                                 {breads.name}
                             </a>
                         </li>

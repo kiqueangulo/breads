@@ -6,8 +6,8 @@ const breads = express.Router();
 
 // Index
 breads.get('/', async (req, res) => {
-    const foundBakers = await Baker.find();
-    const foundBreads = await Bread.find().limit(5);
+    const foundBakers = await Baker.find().lean();
+    const foundBreads = await Bread.find().limit(5).lean();
 
     res.render('index', {
         breads: foundBreads,
